@@ -5,13 +5,27 @@ echo '<script>alert("' . @$_SESSION['username'] . '");</script>';
 $offerType = @$_POST['slOfferType'];
 if (@$offerType != null) {
 
-    require("common.php");
+    require_once ("./common.php");
 
     if ($offerType == 'cargo')
         $update = " 
-            INSERT INTO offers_cargo
+            INSERT INTO offers_cargo (
+            title,
+            starting_adress,
+            destination_adress,
+            length,
+            width,
+            height,
+            weight,
+            material_type,
+            budget,
+            remarks,
+            creation_date,
+            status,
+            user
+            )
             VALUES(
-            666,
+            :title,
             :starting_adress,
             :destination_adress,
             :length,
@@ -27,6 +41,7 @@ if (@$offerType != null) {
             )";
 
     $update_params = array(
+        ':title' => $_POST['txtCargoTitle'],
         ':starting_adress' => $_POST['txtStartAdress'],
         ':destination_adress' => $_POST['txtDestinationAdress'],
         ':length' => $_POST['txtCargoLength'],
@@ -38,7 +53,8 @@ if (@$offerType != null) {
         ':remarks' => $_POST['taCargoRemarks'],
         ':creation_date' => date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME']),
 //            ':status' => $_POST['username'],
-        ':user' => @$_SESSION['username']
+//        ':user' => @$_SESSION['username']
+        ':user' => 'username'
     );
 
     try {

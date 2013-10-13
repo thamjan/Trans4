@@ -3,9 +3,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />-->
+        <link rel="stylesheet" href="css/jquery-ui.css" />
         <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <!--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>-->
+        <script src="js/jquery-ui.js"></script>
         <!--<link rel="stylesheet" href="/resources/demos/style.css" />-->
         <script>
             $(function() {
@@ -62,6 +64,7 @@
             <table>
                 <tr>
                     <td>
+                        <label><?= @$_SESSION['username'] ?></label>
                         <label>Tip ponude</label>
                     </td>
                     <td>
@@ -76,6 +79,14 @@
             </table>
             <section id='sCargo'>
                 <table>
+                    <tr>
+                        <td>
+                            <label>Naziv</label>
+                        </td>
+                        <td>
+                            <input type="text" id="txtCargoTitle"  name='txtCargoTitle'/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label>Početna adresa</label>
@@ -146,14 +157,21 @@
                             <label>Napomene</label>
                         </td>
                         <td>
-                            <textarea id='taCargoRemarks'  name='taCargoRemarks' cols="66" rows="6">
-                            </textarea>
+                            <textarea id='taCargoRemarks'  name='taCargoRemarks' cols="66" rows="6"></textarea>
                         </td>
                     </tr>
                 </table>
             </section>
             <section id='sTruck' name='sTruck'>
                 <table>
+                    <tr>
+                        <td>
+                            <label>Naziv</label>
+                        </td>
+                        <td>
+                            <input type="text" id="txtTruckTitle"  name='txtCargoTitle'/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label>Trenutna lokacija</label>
@@ -218,8 +236,7 @@
                             <label>Napomene</label>
                         </td>
                         <td>
-                            <textarea id='taTruckRemarks'  name='taTruckRemarks' cols="66" rows="6">
-                            </textarea>
+                            <textarea id='taTruckRemarks'  name='taTruckRemarks' cols="66" rows="6"></textarea>
                         </td>
                     </tr>
                 </table>

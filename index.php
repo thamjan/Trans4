@@ -27,7 +27,9 @@
                 <td rowspan="2">
                     <img src="images/trans02_06.png" width="14" height="39" alt=""></td>
                 <td colspan="6">
-                    <img src="images/trans02_07.png" width="98" height="30" alt=""></td>
+                    <a href="register.php">
+                        <img src="images/trans02_07.png" width="98" height="30" alt=""></td>
+                    </a>
                 <td>
                     <img src="images/spacer.gif" width="1" height="30" alt=""></td>
             </tr>
@@ -81,8 +83,8 @@
                 <td colspan="3" rowspan="2">
                     <img src="images/trans02_21.png" width="37" height="163" alt=""></td>
                 <td>
-                    <a href="newOfer.php">
-                       <img src="images/trans02_22.png" width="81" height="78" alt="">
+                    <a href="newOffer.php">
+                        <img src="images/trans02_22.png" width="81" height="78" alt="">
                     </a>
                 </td>
                 <td colspan="2" rowspan="2">
@@ -90,8 +92,8 @@
                 <td colspan="2" rowspan="2">
                     <img src="images/trans02_24.png" width="87" height="163" alt=""></td>
                 <td colspan="4">
-                    <a href="oferList.php">
-                       <img src="images/trans02_25.png" width="80" height="78" alt="">
+                    <a href="offerList.php">
+                        <img src="images/trans02_25.png" width="80" height="78" alt="">
                     </a>
                 </td>
                 <td rowspan="2">
