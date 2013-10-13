@@ -3,8 +3,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <!--<link rel="stylesheet" href="/resources/demos/style.css" />-->
+        <script>
+            $(function() {
+                $("#dateAvailableFrom, #dateAvailableTo").datepicker();
+            });
+        </script>
         <script>
             $(document).ready(function() {
+                $ok = false;
 //                alert('$(document).ready(function(){');
                 $slOfferType = $('#slOfferType');
                 $sCargo = $('#sCargo');
@@ -16,6 +26,9 @@
                 $slOfferType.change(function() {
                     if ($slOfferType.val() === 'cargo') {
 //                        alert('cargo');
+                    // temporary, change it!!! //
+                    $ok = true;                //
+                    ////////////////////////////
                         $sCargo.slideDown('slow');
                         $sTruck.slideUp('slow');
                     }
@@ -24,24 +37,40 @@
                         $sCargo.slideUp('slow');
                         $sTruck.slideDown('slow');
                     }
+                    else {
+                        $sCargo.slideUp('slow');
+                        $sTruck.slideUp('slow');
+                    }
+                });
+
+                $('#btnSubmit').click(function(event) {
+                    event.preventDefault();
+//                    alert('btnSubmit');
+                    if ($ok === true) {
+                        $('#formNewOffer').submit();
+                    }
+                    else {
+                        alert('Popunite polja...');
+                    }
                 });
             });
         </script>
     </head>
     <body>
         <h2>Nova ponuda robe</h2>
-        <form id="formNewOffer" method="post" action="">
+        <form id="formNewOffer" method="post" action="logic/newOffer.php">
             <table>
                 <tr>
                     <td>
                         <label>Tip ponude</label>
                     </td>
                     <td>
-                        <select id="slOfferType">
+                        <select id="slOfferType" name='slOfferType'>
                             <option value=""></option>
                             <option value="cargo">Roba</option>
                             <option value="truck">Prazan kamion</option>
                         </select>
+                        <button id='btnSubmit' name='btnSubmit'>Kreiraj</button>
                     </td>
                 </tr>
             </table>
@@ -52,7 +81,7 @@
                             <label>Početna adresa</label>
                         </td>
                         <td>
-                            <input type="text" id="txtStartAdress" />
+                            <input type="text" id="txtStartAdress"  name='txtStartAdress'/>
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +89,7 @@
                             <label>Odredišna adresa</label>
                         </td>
                         <td>
-                            <input type="text" id="txtDestinationAdress" />
+                            <input type="text" id="txtDestinationAdress"  name='txtDestinationAdress'/>
                         </td>
                     </tr>
                     <tr>
@@ -69,11 +98,19 @@
                         </td>
                         <td>
                             <label>Dužina</label>
-                            <input type="text" id="txtLength" />
+                            <input type="text" id="txtCargoLength"  name='txtCargoLength'/>
                             <label>Širina</label>
-                            <input type="text" id="txtWidth" />
+                            <input type="text" id="txtCargoWidth"  name='txtCargoWidth'/>
                             <label>Visina</label>
-                            <input type="text" id="txtHeight" />
+                            <input type="text" id="txtCargoHeight"  name='txtCargoHeight'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Težina</label>
+                        </td>
+                        <td>
+                            <input type="text" id="txtCargoWeight"  name='txtCargoWeight'/>
                         </td>
                     </tr>
                     <tr>
@@ -81,7 +118,7 @@
                             <label>Tip/materijal robe</label>
                         </td>
                         <td>
-                            <select id="slCartgoType">
+                            <select id="slCartgoType" name='slCartgoType'>
                                 <option value=""></option>
                                 <option value="type1">Tip 1</option>
                                 <option value="type2">Tip 2</option>
@@ -93,7 +130,7 @@
                             <label>Slike</label>
                         </td>
                         <td>
-                            <input type="file" id='filePhotos' />
+                            <input type="file" id='fileCargoPhotos'  name='fileCargoPhotos'/>
                         </td>
                     </tr>
                     <tr>
@@ -101,7 +138,7 @@
                             <label>Budžet</label>
                         </td>
                         <td>
-                            <input type="text" id="txtBudget" />
+                            <input type="text" id="txtBudget"  name='txtBudget'/>
                         </td>
                     </tr>
                     <tr>
@@ -109,27 +146,20 @@
                             <label>Napomene</label>
                         </td>
                         <td>
-                            <textarea id='taRemarks' cols="66" rows="6">
-                        
+                            <textarea id='taCargoRemarks'  name='taCargoRemarks' cols="66" rows="6">
                             </textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
                         </td>
                     </tr>
                 </table>
             </section>
-            <section id='sTruck'>
+            <section id='sTruck' name='sTruck'>
                 <table>
                     <tr>
                         <td>
                             <label>Trenutna lokacija</label>
                         </td>
                         <td>
-                            <input type="text" id="txtCurrentLocation" />
+                            <input type="text" id="txtCurrentLocation"  name='txtCurrentLocation'/>
                         </td>
                     </tr>
                     <tr>
@@ -137,7 +167,7 @@
                             <label>Tip vozila</label>
                         </td>
                         <td>
-                            <select id="slTruckType">
+                            <select id="slTruckType" name='slTruckType'>
                                 <option value=""></option>
                                 <option value="type1">Tip 1</option>
                                 <option value="type2">Tip 2</option>
@@ -150,11 +180,11 @@
                         </td>
                         <td>
                             <label>Dužina</label>
-                            <input type="text" id="txtLength" />
+                            <input type="text" id="txtLength"  name='txtLength'/>
                             <label>Širina</label>
-                            <input type="text" id="txtWidth" />
+                            <input type="text" id="txtWidth"  name='txtWidth'/>
                             <label>Visina</label>
-                            <input type="text" id="txtHeight" />
+                            <input type="text" id="txtHeight"  name='txtHeight'/>
                         </td>
                     </tr>
                     <tr>
@@ -162,15 +192,25 @@
                             <label>Nosivost</label>
                         </td>
                         <td>
-                            <input type="text" id="txtCapacity" />
+                            <input type="text" id="txtTruckWeight"  name='txtTruckWeight'/>
                         </td>
                     </tr>
+                    <tr>
                     <tr>
                         <td>
                             <label>Slike</label>
                         </td>
                         <td>
-                            <input type="file" id='filePhotos' />
+                            <input type="file" id='fileTruckPhotos'  name='fileTruckPhotos'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Vreme raspoloživosti</label>
+                        </td>
+                        <td>
+                            <input type='text' id='dateAvailableFrom'  name='dateAvailableFrom'/>
+                            <input type='text' id='dateAvailableTo'  name='dateAvailableTo'/>
                         </td>
                     </tr>
                     <tr>
@@ -178,19 +218,13 @@
                             <label>Napomene</label>
                         </td>
                         <td>
-                            <textarea id='taRemarks' cols="66" rows="6">
-                        
+                            <textarea id='taTruckRemarks'  name='taTruckRemarks' cols="66" rows="6">
                             </textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
                         </td>
                     </tr>
                 </table>
             </section>
+
         </form>
         <?php
         // put your code here

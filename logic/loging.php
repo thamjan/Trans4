@@ -58,12 +58,13 @@
             unset($row['lozinka']); 
              
             $_SESSION['user'] = $row;
+            $_SESSION['username'] = $row['username'];
             $_SESSION['ime'] = $row['ime'];
             $_SESSION['timeout'] = time();
             $_SESSION['errMsg'] = '';
              
-            header("Location: ../dashboard.php"); 
-            die("Redirecting to: dashboard.php"); 
+            header("Location: ../index.php"); 
+            die("Redirecting to: index.php"); 
         } 
         else 
         { 
